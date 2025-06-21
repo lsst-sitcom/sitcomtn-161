@@ -58,20 +58,64 @@ The Rubin ComCam on-sky campaign performed at the end of 2024 provided observati
 % You can also use the \input command to include several content files.
 
 \section{Introduction}
-The Rubin ComCam on-sky observing campaign (ref to SITCOMTN-149) undertaken at the end-of-year 2024 covered seven fields, among which the low ecliptic latitude Rubin SV 38 7 field. This field contains the Abell 360 (A360) galaxy cluster, an intermediate mass cluster ($M_{500,c} = 4.3\times 10^{14} \rm{M}_\odot$ from ACT DR5 SZ Cluster Catalog, ref) at z=0.22, that we use as a commissioning demonstrator of Rubin capabilities for cluster WL studies. This TechNote focuses on assessing the quality of the PSF modeling in the A360 field, as performed by the Rubin Science Pipeline for the Data Preview 1 (DP1) data release (ref to DP1 paper). PSF modeling was performed using the PSFex and Piff methods (Bertin et al., Jarvis et al.); the latter has been found more accurate (ref to the PSF section of DP1 paper, ref to PSTN-049 (https://pstn-019.lsst.io/PSTN-019.pdf), ref to LSST Science pipelines Papers) and has been used for the final modeling of DP1.
+The Rubin ComCam on-sky observing campaign (ref to SITCOMTN-149) undertaken at the end-of-year 2024 covered seven fields, among which the low ecliptic latitude Rubin SV 38 7 field. This field contains the Abell 360 (A360) galaxy cluster, an intermediate mass cluster ($M_{500,c} = 4.3\times 10^{14} \rm{M}_\odot$ from ACT DR5 SZ Cluster Catalog, ref) at z=0.22, that we use as a commissioning demonstrator of cluster WL studies with data from the Vera C. Rubin observatory. This TechNote focuses on assessing the quality of the PSF modeling in the A360 field, as performed by the Rubin Science Pipeline for the Data Preview 1 (DP1) data release (ref to DP1 paper). PSF modeling was performed using the PSFex and Piff methods (Bertin et al., Jarvis et al.); the latter has been found more accurate (ref to the PSF section of DP1 paper, ref to PSTN-049 (https://pstn-019.lsst.io/PSTN-019.pdf), ref to LSST Science pipelines Papers) and has been used for the final modeling of DP1.
 
 \section{Dataset}
-The Rubin SV 38 7 field has been observed in $g$ (44 visits), $r$ (55 visits), $i$ (57 visits) and $z$ (27 visits) (ref to DP1 paper; ref to SITCOMTN-149; ref to RTN-095). No $u$ or $y$-band data were collected in that field. The $r$ or $i$-bands are generally used for weak lensing studies (ref to DES and HSC), the bluer bands being more affected by differential chromatic refraction (ref). For the DP1 analysis of A360 we will use the $i$-band, which received the most visits in DP1, to measure the shear profile around A360 and therefore focus on the $i$-band only for the purpose of this work. All the tests performed hereafter use data from the tracts and patches overlapping with  a 1 deg x 1 deg square field centered on the BCG of Abell 360, at (ra,dec) = (37.86, 6.98) deg. 
-The DP1 object table gathers all the properties of the objects (stars and galaxies) detected in the coadded images, in each band. Figure XX shows the number of images that contributed to the coadds in the field of A360 and was obtained from the \code{i\_inputCount} information available in the object table. The dithering pattern of the observations is clearly visible.
-%\includegraphics{Figures/nb_of_images.png}
+The Rubin SV 38 7 field has been observed in $g$ (44 visits), $r$ (55 visits), $i$ (57 visits) and $z$ (27 visits) (ref to DP1 paper; ref to SITCOMTN-149; ref to RTN-095). No $u$ or $y$-band data were collected in that field. The $r$ or $i$-bands are generally used for weak lensing studies (ref to DES and HSC), the bluer bands being more affected by differential chromatic refraction (ref). For the DP1 analysis of A360 we will use the $i$-band, which received the most visits in DP1, to measure the shear profile around A360 and therefore focus on the $i$-band only for the purpose of this work. All the tests performed hereafter use data from the tracts and patches overlapping with  a $1 \times 1$ square field centered on the BCG of Abell 360, at (ra,dec) = (37.86, 6.98) deg. 
+
+The DP1 object table gathers all the properties of the objects (stars and galaxies) detected in the coadded images, in each band. The left panel in figure~\ref{fig:dither} shows the number of images that contributed to the coadds in the field of A360 and was obtained from the \code{i\_inputCount} information available in the object table. The dithering pattern of the observations is clearly visible.
+\begin{figure}
+\includegraphics[width=\textwidth]{Figures/psf_ellipticity_visits.png}
+\caption{\emph{Left}: number of images used in the coadded data in the field of A360. \emph{Right}: modulus of the PSF ellipticity in the field. The dithering pattern appears clearly in both figures.\label{fig:dither}}
+\end{figure}
+
+The object table also includes the second moments of the object surface brightness $I_{xx,xy,yy}$ and second moments of the PSF model $I_{xx,xy,yy}^{\rm PSF}\,$, both measured using HSM (ref). A flag in the catalog identifies stars that have been used by Piff to build the PSF model; these are termed PSF stars. Additionally, a set of reserved stars (selected with the same criteria as PSF stars, but not used in the fit) are flagged in the catalog for the purpose of PSF testing (e.g. ref to the DES Y3 or DES Y6 PSF paper). 
+With that selection, there are 1977 PSF stars and 229 reserved stars at our disposal to run the PSF diagnostics tests below. 
+
 
 \section{PSF properties and diagnostics}
-\subsection{PSF residuals: whisker plots and distributions}
+
+From the second moment matrix expressed in the (x,y) frame of the tracts, we define:
+\begin{itemize}
+\item The trace 
+\begin{equation}
+T = I_{xx} + I_{yy}
+\end{equation}
+
+\item The ellipticities e1, e2
+\begin{eqnarray}
+  e_1 &=& (I_{xx} - I_{yy})/T \\
+  e_2 &=& 2 I_{xy} / T
+\end{eqnarray}
+
+\item The modulus of the ellipticity $e$ and the orientation $\theta$ of the major axis of the ellipse with respect to the x axis, given by
+\begin{equation} 
+e = \sqrt{e_1^2 + e_2^2}
+\end{equation}
+\begin{equation}
+\theta = 0.5 \times \arctan(e_2/e_1)
+\end{equation}
+\end{itemize}
+
+
+From these, we compute the residuals between the measurements for the set of PSF (or reserved) stars and that of the PSF model at their locations.  Namely,
+\begin{eqnarray}
+\delta e_1 &=& e_1^{\rm meas} - e_1^{\rm model}, \, \delta e_2 = e_2^{\rm meas} - e_2^{\rm model}\\
+\delta T &=& T^{\rm meas} - T^{\rm model} 
+\end{eqnarray}
+
+Before looking into the residuals in the next section, the right panel in Figure~\ref{fig:dither} displays the modulus of the PSF model ellipticity in the field. While the mean ellipticity across the field is ~0.07, there are several areas where the PSF ellipticity reaches significant values. [This is understood… see exchange with Pierre-François, Andrès  + TN-149. No clear correlation with the number of images in the coadd?]  
+
+
+\subsection{PSF residuals - distributions and whisker plots}
 \begin{figure}
 \includegraphics[width=\textwidth]{Figures/whiskers_used.png}
 \includegraphics[width=\textwidth]{Figures/whiskers_reserved.png}
 \caption{Whikser plots for the PSF (top) and reserved stars (bottom) obtained for the measurements (left), PSF model (middle) and the residuals (right). The size of the whiskers is proportional to the ellipticity modulus and the orientation gives the direction of the major exis of the ellipse. \label{fig:whiskers}}
 \end{figure}
+
+
+
 \subsection{PSF residuals - tangential shear profile}
 \subsection{PSF rho-statistics}
 
