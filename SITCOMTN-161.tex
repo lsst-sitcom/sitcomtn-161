@@ -61,7 +61,7 @@ The Rubin ComCam on-sky campaign performed at the end of 2024 provided observati
 The Rubin ComCam on-sky observing campaign (ref to SITCOMTN-149) undertaken at the end-of-year 2024 covered seven fields, among which the low ecliptic latitude Rubin SV 38 7 field. This field contains the Abell 360 (A360) galaxy cluster, an intermediate mass cluster ($M_{500,c} = 4.3\times 10^{14} \rm{M}_\odot$ from ACT DR5 SZ Cluster Catalog, ref) at z=0.22, that we use as a commissioning demonstrator of cluster WL studies with data from the Vera C. Rubin observatory. This TechNote focuses on assessing the quality of the PSF modeling in the A360 field, as performed by the Rubin Science Pipeline for the Data Preview 1 (DP1) data release (ref to DP1 paper). PSF modeling was performed using the PSFex and Piff methods (Bertin et al., Jarvis et al.); the latter has been found more accurate (ref to the PSF section of DP1 paper, ref to PSTN-049 (https://pstn-019.lsst.io/PSTN-019.pdf), ref to LSST Science pipelines Papers) and has been used for the final modeling of DP1.
 
 \section{Dataset}
-The Rubin SV 38 7 field has been observed in $g$ (44 visits), $r$ (55 visits), $i$ (57 visits) and $z$ (27 visits) (ref to DP1 paper; ref to SITCOMTN-149; ref to RTN-095). No $u$ or $y$-band data were collected in that field. The $r$ or $i$-bands are generally used for weak lensing studies (ref to DES and HSC), the bluer bands being more affected by differential chromatic refraction (ref). For the DP1 analysis of A360 we will use the $i$-band, which received the most visits in DP1, to measure the shear profile around A360 and therefore focus on the $i$-band only for the purpose of this work. All the tests performed hereafter use data from the tracts and patches overlapping with  a $1 \times 1$ square field centered on the BCG of Abell 360, at (ra,dec) = (37.86, 6.98) deg. 
+The Rubin SV 38 7 field has been observed in $g$ (44 visits), $r$ (55 visits), $i$ (57 visits) and $z$ (27 visits) (ref to DP1 paper; ref to SITCOMTN-149; ref to RTN-095). No $u$ or $y$-band data were collected in that field. The $r$ or $i$-bands are generally used for weak lensing studies (ref to DES and HSC), the bluer bands being more affected by differential chromatic refraction (ref). For the DP1 analysis of A360 we will use the $i$-band, which received the most visits in DP1, to measure the shear profile around A360 and therefore focus on the $i$-band only for the purpose of this work. All the tests performed hereafter use data from the tracts and patches overlapping with  a $1^\circ \times 1^\circ$ square field centered on the BCG of Abell 360, at (ra,dec) = (37.86, 6.98) deg. 
 
 The DP1 object table gathers all the properties of the objects (stars and galaxies) detected in the coadded images, in each band. The left panel in figure~\ref{fig:dither} shows the number of images that contributed to the coadds in the field of A360 and was obtained from the \code{i\_inputCount} information available in the object table. The dithering pattern of the observations is clearly visible.
 \begin{figure}
@@ -91,9 +91,11 @@ T = I_{xx} + I_{yy}
 \item The modulus of the ellipticity $e$ and the orientation $\theta$ of the major axis of the ellipse with respect to the x axis, given by
 \begin{equation} 
 e = \sqrt{e_1^2 + e_2^2}
+\label{eq:modulus}
 \end{equation}
 \begin{equation}
 \theta = 0.5 \times \arctan(e_2/e_1)
+\label{eq:theta}
 \end{equation}
 \end{itemize}
 
@@ -108,6 +110,17 @@ Before looking into the residuals in the next section, the right panel in Figure
 
 
 \subsection{PSF residuals - distributions and whisker plots}
+To assess the performance of the PSF model, a first test consists in comparing the normalized distribution of the residuals defined above, for the PSF and reserved stars, to check for a possible overfitting of the PSF model (DES Y6 PSF paper 2025). As can be seen in Figure~\ref{fig:residual_distrib} (left and middle panels), the ellipticity residuals peak around zero and extend to $\sim 0.02$. The right panel shows the relative residuals of the trace, peaked around zero and not exceeding beyond $\sim 5 \%$. The residuals obtained from the PSF stars and reserved stars behave similarly, not indicating any overfitting of the PSF model.
+
+\begin{figure}
+\includegraphics[width=\textwidth]{Figures/residual_histograms.png}
+\caption{Normalised distributions of the ellipticity residuals $\delta e_1$ (left), $\delta e_2$ (right), and of the relative residuals $\delta T/T$ (right). The distributions are shown for the PSF (blue) and reserved (orange) sets of stars. \label{fig:residual_distrib}}
+\end{figure}
+
+
+Figure~\ref{fig:whiskers} shows the variation of the PSF ellipticity and residuals across the field of A360. Each whisker is oriented according the direction of the ellipse major axis ($\theta$, Eq.(\ref{eq:theta})) and its length is proportional to the ellipticity modulus ($e$, Eq.(\ref{eq:modulus})); this is done for the PSF stars (top row) or reserved stars (bottom row). The left panel corresponds the measurements on the star themselves, the middle panel shows the corresponding PSF model, and the residuals are displayed in the right panel. A reference whisker is given for an ellipticity $e = 0.1$. The circle corresponds to a $0.5^\circ$  field around the cluster’s BCG, i.e., roughly the field we aim the WL measurements at. Looking at the residuals (right panel), we conclude that the PSF model perfoms satisfactorily, in particular as it is successful at correcting the coherent ellipticity patterns seen across the field.
+
+
 \begin{figure}
 \includegraphics[width=\textwidth]{Figures/whiskers_used.png}
 \includegraphics[width=\textwidth]{Figures/whiskers_reserved.png}
