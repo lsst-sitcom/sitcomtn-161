@@ -124,17 +124,33 @@ Figure~\ref{fig:whiskers} shows the variation of the PSF ellipticity and residua
 \begin{figure}
 \includegraphics[width=\textwidth]{Figures/whiskers_used.png}
 \includegraphics[width=\textwidth]{Figures/whiskers_reserved.png}
-\caption{Whikser plots for the PSF (top) and reserved stars (bottom) obtained for the measurements (left), PSF model (middle) and the residuals (right). The size of the whiskers is proportional to the ellipticity modulus and the orientation gives the direction of the major exis of the ellipse. \label{fig:whiskers}}
+\caption{Whikser plots for the PSF (top) and reserved stars (bottom) obtained for the measurements (left), PSF model (middle) and the residuals (right). The size of the whiskers is proportional to the ellipticity modulus and the orientation gives the direction of the major axis of the ellipse. \label{fig:whiskers}}
+\end{figure}
+
+\subsection{PSF residuals - tangential shear profile}
+
+An important diagnostic for cluster weak lensing is to evaluate the contribution of the PSF residuals to the tangential shear signal. To do so, we compute the tangential component of the residuals $\delta e_t$ as 
+\begin{equation}
+\delta e_t = - \delta e_1  \cos(2 \phi) - \delta e_2  \sin(2 \phi),
+\end{equation}
+where $\phi$ is the position angle at the location of the computed residuals.
+
+Figure~{\ref{fig:res_profile}} shows the corresponding binned radial profile as a function of the angular separation to the cluster center. The profile for PSF stars shows smaller error bars because of the larger number compared to the reserved set of the stars. The profiles are consistent with zero and have an amplitude more than an order of magnitude lower than the typical expected signal for the cluster with mass of A360 (see Section~\ref{sec:shear_profile}). 
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Figures/residual_tan_profile_CLMM.png}
+\caption{Binned tangential profile of the ellipticity residuals for the PSF stars (blue circle), for the reserved stars (orange plus sign marker), and for both sets together (green cross).\label{fig:res_profile}}
 \end{figure}
 
 
-
-\subsection{PSF residuals - tangential shear profile}
 \subsection{PSF rho-statistics}
+The $\rho$-statistics (Rowe 2010; Jarvis et al. 2016) are a set of two-point correlation functions involving PSF ellipticity and size residuals. They quantify spatial correlation errors in PSF modeling and contributions from PSF leakage. We used the LSST Science Pipelines \code{analysis\_tools}\footnote{\url{https://pipelines.lsst.io/v/daily/modules/lsst.analysis.tools}} implementation to compute the $\rho$-statistics, which internally relies on the TreeCorr software package (Jarvis et al. 2004) for the correlation function calculations. The definitions of the $\rho$-statistics as calculated by \code{analysis\_tools} are documented in the LSST pipelines and include those originally introduced by Rowe (2010), Jarvis et al. (2016), as well as an additional one defined in the context of cluster analysis by Melchior et al. (2015).
 
+We used the set of reserved stars to calculate the rho statistics in the $i$-band, and display the results in FigureXX.
 
 \section{HSM tangential and cross shear profile around A360 from color-cut selection}
-
+\label{sec:shear_profile}
 \appendix
 % Include all the relevant bib files.
 % https://lsst-texmf.lsst.io/lsstdoc.html#bibliographies
