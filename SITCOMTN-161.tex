@@ -149,8 +149,26 @@ The $\rho$-statistics (Rowe 2010; Jarvis et al. 2016) are a set of two-point cor
 
 We used the set of reserved stars to calculate the rho statistics in the $i$-band, and display the results in FigureXX.
 
-\section{HSM tangential and cross shear profile around A360 from color-cut selection}
+\section{HSM tangential and cross shear profile around A360 from simple color-cut selection}
 \label{sec:shear_profile}
+
+From the tests above, it appears that the PSF modeling in the A360 field is sufficiently accurate not to hinder a first attempt at measuring the tangential and cross shear profiles around that cluster. The cross shear profile is a particularly useful null test to highlight remaining systematics effects. We therefore proceed to do so, using the HSM ellipticities readily available in the object table (other shape measurements methods will be explored elsewhere- ref to metadetect and anacal TN). 
+
+For this preliminary work, we use a visual inspection of the $r-i$ versus $r$ color-magnitude diagram to select and remove red sequence galaxies from the sample. Source selection in other colors and using photoz is explored more thoroughly in [ref to source selection TN]. Given that the ComCam field of A360 reaches roughly similar depth as HSC Y1 and uses a similar pipeline, we use the HSC Y1 lensing quality cuts and shear calibration procedure (reference) to convert the e1 and e2 ellipticities into g1 and g2 shear estimates. Once the calibration has been applied, we use the DESC CLMM package (ref to Aguena et al.) to compute the tangential and cross reduced shear radial profiles, displayed in Figure~\ref{fig:shear_profile}. The physical distance on the x-axis is obtained from the angular separation assuming a default cosmology, and ranges from 0.4 Mpc to 6 Mpc (to match the circular 0.5 deg field highlighted in the PSF diagnostic plots at the upper end, and to avoid the cluster inner regions known to be affected by other sources of biases such as miscentering and sample contamination). 
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Figures/shear_profile.png}
+\caption{Binned tangential (blue) and cross (orange) reduced shear profile around A360. The green dashed line corresponds shows the expected signal for a NFW halo of mass similar to that of A360, a concentration $c=4$, and assumes the redshift distribution $n(z)$ of the DESC Science Requirement document. \label{fig:shear_profile}}
+\end{figure}
+
+First, the cross shear signal, in orange, scatters around zero, indicating that no significant remaining systematics exists in the measurement. Second, we see a positive tangential shear signal, increasing towards the inner regions as expected. While this analysis is too preliminary to conclude on the robustness of the measured signal, we overplot in dashed green the expected signal from a NFW halo with the mass of A360, an assumed concentration c=4, and a source redshift distribution matching that of the DESC Science Requirement Document (ref to SRD); the actual photometric distribution in that field will be studied elsewhere. We see that the measured tangential shear is in the ballpark of what one could expect with these simplifying assumptions, although more work is required to robustify this result.
+
+
+\section{Conclusion}
+We have checked the PSF model in the field of the galaxy cluster A360, which was observed in the low ecliptic latitude field of the Rubin 2024 ComCam campaign. While the PSF ellipticity reaches values as high as >~0.2 in the coadd data, we find that the model is able to capture and correct the PSF, at a level sufficient not to impact the measurement of the shear profile around A360. 
+
+
 \appendix
 % Include all the relevant bib files.
 % https://lsst-texmf.lsst.io/lsstdoc.html#bibliographies
