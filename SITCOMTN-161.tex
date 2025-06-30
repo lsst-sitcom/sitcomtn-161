@@ -1,6 +1,5 @@
 \documentclass[SE,lsstdraft,authoryear,toc]{lsstdoc}
 \input{meta}
-
 % Package imports go here.
 
 % Local commands go here.
@@ -9,12 +8,12 @@
 %\input{aglossary.tex}
 %\makeglossaries
 
-\title{PSF assessment in the field of Abell 360 and HSM shear profile using ComCam data.}
+\title{PSF assessment in the field of Abell 360 and shapeHSM shear profile using ComCam data.}
 
 % This can write metadata into the PDF.
 % Update keywords and author information as necessary.
 \hypersetup{
-    pdftitle={PSF assessment in the field of Abell 360 and HSM shear profile using ComCam data.},
+    pdftitle={PSF assessment in the field of Abell 360 and shapeHSM shear profile using ComCam data.},
     pdfauthor={First Last},
     pdfkeywords={}
 }
@@ -23,7 +22,7 @@
 % \setDocSubtitle{A subtitle}
 
 \author{%
-First Last
+C. Combet, A. Plazas Malagón, S. Fu, P. Adari, I. Dell'Antonio, A. Englert, M. Gorsuch, K. Laliotis, P.-F. Léget, E. Pedersen, , A. von der Linden, Y. Zhang, et al. (TBC) 
 }
 
 \setDocRef{SITCOMTN-161}
@@ -58,10 +57,11 @@ The Rubin ComCam on-sky campaign performed at the end of 2024 provided observati
 % You can also use the \input command to include several content files.
 
 \section{Introduction}
-The Rubin ComCam on-sky observing campaign (ref to SITCOMTN-149) undertaken at the end-of-year 2024 covered seven fields, among which the low ecliptic latitude Rubin SV 38 7 field. This field contains the Abell 360 (A360) galaxy cluster, an intermediate mass cluster ($M_{500,c} = 4.3\times 10^{14} \rm{M}_\odot$ from ACT DR5 SZ Cluster Catalog, ref) at z=0.22, that we use as a commissioning demonstrator of cluster WL studies with data from the Vera C. Rubin observatory. This TechNote focuses on assessing the quality of the PSF modeling in the A360 field, as performed by the Rubin Science Pipeline for the Data Preview 1 (DP1) data release (ref to DP1 paper). PSF modeling was performed using the PSFex and Piff methods (Bertin et al., Jarvis et al.); the latter has been found more accurate (ref to the PSF section of DP1 paper, ref to PSTN-049 (https://pstn-019.lsst.io/PSTN-019.pdf), ref to LSST Science pipelines Papers) and has been used for the final modeling of DP1.
+The Rubin ComCam on-sky observing campaign \citep{SITCOMTN-149} 
+undertaken at the end-of-year 2024 covered seven fields, among which the low ecliptic latitude Rubin SV 38 7 field. This field contains the Abell 360 (A360) galaxy cluster, an intermediate mass cluster ($M_{500,c} = 4.3\times 10^{14} \rm{M}_\odot$ from ACT DR5 SZ Cluster Catalog, \citealp{2021ApJS..253....3H}) at z=0.22, that we use as a commissioning demonstrator of cluster WL studies with data from the Vera C. Rubin observatory. This TechNote focuses on assessing the quality of the PSF modeling in the A360 field, as performed by the Rubin Science Pipeline for the Data Preview 1 (DP1) data release (ref to DP1 paper). PSF modeling was performed using the PSFex \citep{2011ASPC..442..435B} and Piff methods \citep{2021MNRAS.501.1282J}; the latter has been found more accurate \citep{SITCOMTN-149}(+ref to the PSF section of DP1 paper) and has been used for the final modeling of DP1.
 
 \section{Dataset}
-The Rubin SV 38 7 field has been observed in $g$ (44 visits), $r$ (55 visits), $i$ (57 visits) and $z$ (27 visits) (ref to DP1 paper; ref to SITCOMTN-149; ref to RTN-095). No $u$ or $y$-band data were collected in that field. The $r$ or $i$-bands are generally used for weak lensing studies (ref to DES and HSC), the bluer bands being more affected by differential chromatic refraction (ref). For the DP1 analysis of A360 we will use the $i$-band, which received the most visits in DP1, to measure the shear profile around A360 and therefore focus on the $i$-band only for the purpose of this work. All the tests performed hereafter use data from the tracts and patches overlapping with  a $1^\circ \times 1^\circ$ square field centered on the BCG of Abell 360, at (ra,dec) = (37.86, 6.98) deg. 
+The Rubin SV 38 7 field has been observed in $g$ (44 visits), $r$ (55 visits), $i$ (57 visits) and $z$ (27 visits) (\citealp{SITCOMTN-149}; ref to RTN-095). No $u$ or $y$-band data were collected in that field. The $r$ or $i$-bands are generally used for weak lensing studies (e.g., \citealp{2018MNRAS.481.3170M}), the bluer bands being more affected by differential chromatic refraction \citep{DMTN-017}. For the DP1 analysis of A360 we will use the $i$-band, which received the most visits in DP1, to measure the shear profile around A360; we therefore focus on the $i$-band only for the purpose of this work. All the tests performed hereafter use data from the tracts and patches overlapping with  a $1^\circ \times 1^\circ$ square field centered on the BCG of Abell 360, at (ra,dec) = (37.86, 6.98) deg. 
 
 The DP1 object table gathers all the properties of the objects (stars and galaxies) detected in the coadded images, in each band. The left panel in figure~\ref{fig:dither} shows the number of images that contributed to the coadds in the field of A360 and was obtained from the \code{i\_inputCount} information available in the object table. The dithering pattern of the observations is clearly visible.
 \begin{figure}
@@ -69,8 +69,11 @@ The DP1 object table gathers all the properties of the objects (stars and galaxi
 \caption{\emph{Left}: number of images used in the coadded data in the field of A360. \emph{Right}: modulus of the PSF ellipticity in the field. The dithering pattern appears clearly in both figures.\label{fig:dither}}
 \end{figure}
 
-The object table also includes the second moments of the object surface brightness $I_{xx,xy,yy}$ and second moments of the PSF model $I_{xx,xy,yy}^{\rm PSF}\,$, both measured using HSM (ref). A flag in the catalog identifies stars that have been used by Piff to build the PSF model; these are termed PSF stars. Additionally, a set of reserved stars (selected with the same criteria as PSF stars, but not used in the fit) are flagged in the catalog for the purpose of PSF testing (e.g. ref to the DES Y3 or DES Y6 PSF paper). 
+For each band, the object table also includes the second moments of the object surface brightness $I_{xx,xy,yy}$ and second moments of the PSF model $I_{xx,xy,yy}^{\rm PSF}\,$, both measured using HSM \citep{2003MNRAS.343..459H, 2005MNRAS.361.1287M, 2018MNRAS.481.3170M}. A flag in the catalog identifies stars that have been used by Piff to build the PSF model; these are termed PSF stars. Additionally, a set of reserved stars (selected with the same criteria as PSF stars, but not used in the fit) are flagged in the catalog for the purpose of PSF testing (e.g., \citealp{2025OJAp....8E..26S}). 
 With that selection, there are 1977 PSF stars and 229 reserved stars at our disposal to run the PSF diagnostics tests below. 
+
+\paragraph{Software} This work was run on the Rubin Science Plateform Notebook Aspect at USDF. The A360-related notebooks, including the ones developed for this work are publicly available in a GitHub repository\footnote{\url{https://github.com/lsst-sitcom/comcam_clusters}}.
+
 
 
 \section{PSF properties and diagnostics}
@@ -106,11 +109,12 @@ From these, we compute the residuals between the measurements for the set of PSF
 \delta T &=& T^{\rm meas} - T^{\rm model} 
 \end{eqnarray}
 
-Before looking into the residuals in the next section, the right panel in Figure~\ref{fig:dither} displays the modulus of the PSF model ellipticity in the field. While the mean ellipticity across the field is ~0.07, there are several areas where the PSF ellipticity reaches significant values. [This is understood… see exchange with Pierre-François, Andrès  + TN-149. No clear correlation with the number of images in the coadd?]  
+Before looking into the residuals in the next section, the right panel in Figure~\ref{fig:dither} displays the modulus of the PSF model ellipticity in the field. While the mean ellipticity across the field is ~0.07, there are several areas where the PSF ellipticity reaches significant values. This could be investigated further by checking the PSF at the individual visit level; this goes however beyond the scope of this technote which aims at checking, in the next section, whether the PSF modeling is sufficient for the purpose of measuring a lensing profile around A360.
+  
 
 
 \subsection{PSF residuals - distributions and whisker plots}
-To assess the performance of the PSF model, a first test consists in comparing the normalized distribution of the residuals defined above, for the PSF and reserved stars, to check for a possible overfitting of the PSF model (DES Y6 PSF paper 2025). As can be seen in Figure~\ref{fig:residual_distrib} (left and middle panels), the ellipticity residuals peak around zero and extend to $\sim 0.02$. The right panel shows the relative residuals of the trace, peaked around zero and not exceeding beyond $\sim 5 \%$. The residuals obtained from the PSF stars and reserved stars behave similarly, not indicating any overfitting of the PSF model.
+To assess the performance of the PSF model, a first test consists in comparing the normalized distribution of the residuals defined above, for the PSF and reserved stars, to check for a possible overfitting of the PSF model \citep{2025OJAp....8E..26S}. As can be seen in Figure~\ref{fig:residual_distrib} (left and middle panels), the ellipticity residuals peak around zero and extend to $\sim 0.02$. The right panel shows the relative residuals of the trace, peaked around zero and not exceeding beyond $\sim 5 \%$. The residuals obtained from the PSF stars and reserved stars behave similarly, not indicating any overfitting of the PSF model.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{Figures/residual_histograms.png}
@@ -118,7 +122,7 @@ To assess the performance of the PSF model, a first test consists in comparing t
 \end{figure}
 
 
-Figure~\ref{fig:whiskers} shows the variation of the PSF ellipticity and residuals across the field of A360. Each whisker is oriented according the direction of the ellipse major axis ($\theta$, Eq.(\ref{eq:theta})) and its length is proportional to the ellipticity modulus ($e$, Eq.(\ref{eq:modulus})); this is done for the PSF stars (top row) or reserved stars (bottom row). The left panel corresponds the measurements on the star themselves, the middle panel shows the corresponding PSF model, and the residuals are displayed in the right panel. A reference whisker is given for an ellipticity $e = 0.1$. The circle corresponds to a $0.5^\circ$  field around the cluster’s BCG, i.e., roughly the field we aim the WL measurements at. Looking at the residuals (right panel), we conclude that the PSF model perfoms satisfactorily, in particular as it is successful at correcting the coherent ellipticity patterns seen across the field.
+Figure~\ref{fig:whiskers} shows the variation of the PSF ellipticity and residuals across the field of A360. Each whisker is oriented according the direction of the ellipse major axis ($\theta$, Eq.(\ref{eq:theta})) and its length is proportional to the ellipticity modulus ($e$, Eq.(\ref{eq:modulus})); this is done for the PSF stars (top row) or reserved stars (bottom row). The left panel corresponds the measurements on the star themselves, the middle panel shows the corresponding PSF model, and the residuals are displayed in the right panel. A reference whisker is given for an ellipticity $e = 0.1$. The circle corresponds to a $0.5^\circ$  field around the cluster’s BCG, i.e., corresponding to $\sim 6$~Mpc at the cluster's redshift (roughly the field we aim the WL measurements at). Looking at the residuals (right panel), we conclude that the PSF model perfoms satisfactorily, in particular as it is successful at correcting the coherent ellipticity patterns seen across the field.
 
 
 \begin{figure}
@@ -145,16 +149,17 @@ Figure~{\ref{fig:res_profile}} shows the corresponding binned radial profile as 
 
 
 \subsection{PSF rho-statistics}
-The $\rho$-statistics (Rowe 2010; Jarvis et al. 2016) are a set of two-point correlation functions involving PSF ellipticity and size residuals. They quantify spatial correlation errors in PSF modeling and contributions from PSF leakage. We used the LSST Science Pipelines \code{analysis\_tools}\footnote{\url{https://pipelines.lsst.io/v/daily/modules/lsst.analysis.tools}} implementation to compute the $\rho$-statistics, which internally relies on the TreeCorr software package (Jarvis et al. 2004) for the correlation function calculations. The definitions of the $\rho$-statistics as calculated by \code{analysis\_tools} are documented in the LSST pipelines and include those originally introduced by Rowe (2010), Jarvis et al. (2016), as well as an additional one defined in the context of cluster analysis by Melchior et al. (2015).
+The $\rho$-statistics \citep{2010MNRAS.404..350R, 2016MNRAS.460.2245J} are a set of two-point correlation functions involving PSF ellipticity and size residuals. They quantify spatial correlation errors in PSF modeling and contributions from PSF leakage. We used the LSST Science Pipelines \code{analysis\_tools}\footnote{\url{https://pipelines.lsst.io/v/daily/modules/lsst.analysis.tools}} implementation to compute the $\rho$-statistics, which internally relies on the TreeCorr software package \citep{2015ascl.soft08007J} for the correlation function calculations. The definitions of the $\rho$-statistics as calculated by \code{analysis\_tools} are documented in the LSST pipelines and include those originally introduced by \citet{2010MNRAS.404..350R, 2016MNRAS.460.2245J}, as well as an additional one defined in the context of cluster analysis by \citet{2015MNRAS.449.2219M}.
 
 We used the set of reserved stars to calculate the rho statistics in the $i$-band, and display the results in FigureXX.
 
 \section{HSM tangential and cross shear profile around A360 from simple color-cut selection}
 \label{sec:shear_profile}
 
-From the tests above, it appears that the PSF modeling in the A360 field is sufficiently accurate not to hinder a first attempt at measuring the tangential and cross shear profiles around that cluster. The cross shear profile is a particularly useful null test to highlight remaining systematics effects. We therefore proceed to do so, using the HSM ellipticities readily available in the object table (other shape measurements methods will be explored elsewhere- ref to metadetect and anacal TN). 
+From the tests above, it appears that the PSF modeling in the A360 field is sufficiently accurate not to hinder a first attempt at measuring the tangential and cross shear profiles around that cluster. The cross shear profile is a particularly useful null test to highlight remaining systematics effects. We therefore proceed to do so, using the HSM ellipticities readily available in the object table (other shape measurements methods, such as \code{Metadetect} or \code{Anacal} will be explored elsewhere; see \citet{SITCOMTN-162} for the \code{Metadetect} analysis). 
 
-For this preliminary work, we use a visual inspection of the $r-i$ versus $r$ color-magnitude diagram to select and remove red sequence galaxies from the sample. Source selection in other colors and using photoz is explored more thoroughly in [ref to source selection TN]. Given that the ComCam field of A360 reaches roughly similar depth as HSC Y1 and uses a similar pipeline, we use the HSC Y1 lensing quality cuts and shear calibration procedure (reference) to convert the e1 and e2 ellipticities into g1 and g2 shear estimates. Once the calibration has been applied, we use the DESC CLMM package (ref to Aguena et al.) to compute the tangential and cross reduced shear radial profiles, displayed in Figure~\ref{fig:shear_profile}. The physical distance on the x-axis is obtained from the angular separation assuming a default cosmology, and ranges from 0.4 Mpc to 6 Mpc (to match the circular 0.5 deg field highlighted in the PSF diagnostic plots at the upper end, and to avoid the cluster inner regions known to be affected by other sources of biases such as miscentering and sample contamination). 
+For this preliminary work, we use a visual inspection of the $r-i$ versus $r$ color-magnitude diagram to select and remove red sequence galaxies from the sample. Source selection in other colors and using photoz is explored more thoroughly in \citet{SITCOMTN-163}. 
+Given that the ComCam field of A360 reaches roughly similar depth as HSC Y1 and uses a similar pipeline, we use the HSC Y1 lensing quality cuts and shear calibration procedure (reference) to convert the e1 and e2 ellipticities into g1 and g2 shear estimates. Once the calibration has been applied, we use the DESC CLMM package (ref to Aguena et al.) to compute the tangential and cross reduced shear radial profiles, displayed in Figure~\ref{fig:shear_profile}. The physical distance on the x-axis is obtained from the angular separation assuming a default cosmology, and ranges from 0.4 Mpc to 6 Mpc (to match the circular 0.5 deg field highlighted in the PSF diagnostic plots at the upper end, and to avoid the cluster inner regions known to be affected by other sources of biases such as miscentering and sample contamination). 
 
 \begin{figure}
 \centering
@@ -174,7 +179,7 @@ We have checked the PSF model in the field of the galaxy cluster A360, which was
 % https://lsst-texmf.lsst.io/lsstdoc.html#bibliographies
 \section{References} \label{sec:bib}
 \renewcommand{\refname}{} % Suppress default Bibliography section
-\bibliography{local,lsst,lsst-dm,refs_ads,refs,books}
+\bibliography{local}%,lsst,lsst-dm,refs_ads,refs,books}
 
 % Make sure lsst-texmf/bin/generateAcronyms.py is in your path
 \section{Acronyms} \label{sec:acronyms}
