@@ -72,7 +72,13 @@ The DP1 object table gathers all the properties of the objects (stars and galaxi
 For each band, the object table also includes the second moments of the object surface brightness $I_{xx,xy,yy}$ and second moments of the PSF model $I_{xx,xy,yy}^{\rm PSF}\,$, both measured using HSM \citep{2003MNRAS.343..459H, 2005MNRAS.361.1287M, 2018MNRAS.481.3170M}. A flag in the catalog identifies stars that have been used by Piff to build the PSF model; these are termed PSF stars. Additionally, a set of reserved stars (selected with the same criteria as PSF stars, but not used in the fit) are flagged in the catalog for the purpose of PSF testing (e.g., \citealp{2025OJAp....8E..26S}). 
 With that selection, there are 1977 PSF stars and 229 reserved stars at our disposal to run the PSF diagnostics tests below. 
 
-\paragraph{Software} This work was run on the Rubin Science Plateform Notebook Aspect at USDF. The A360-related notebooks, including the ones developed for this work are publicly available in a GitHub repository\footnote{\url{https://github.com/lsst-sitcom/comcam_clusters}}.
+\paragraph*{Software} This work was run on the Rubin Science Plateform Notebook Aspect at USDF. The A360-related notebooks, including the ones developed for this work are publicly available in a GitHub repository\footnote{\url{https://github.com/lsst-sitcom/comcam_clusters}}.
+The figures in this note have been produced using the following:
+\begin{itemize}
+\item \code{repo = '/repo/dp1'}
+\item \code {collection = 'LSSTComCam/runs/DRP/DP1/v29\_0\_0/DM-50260'}
+\item Science pipeline version: \code{Weekly 2025\_17}
+\end{itemize}
 
 
 
