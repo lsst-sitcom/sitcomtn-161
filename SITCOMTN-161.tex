@@ -22,7 +22,7 @@
 % \setDocSubtitle{A subtitle}
 
 \author{%
-C. Combet, A. Plazas Malagón, S. Fu, P. Adari, I. Dell'Antonio, A. Englert, M. Gorsuch, K. Laliotis, P.-F. Léget, E. Pedersen, A. von der Linden, Y. Zhang, et al. (TBC)
+C. Combet, A. Plazas Malagón, S. Fu, P. Adari, I. Dell'Antonio, A. Englert, M. Gorsuch, K. Laliotis, P.-F. Léget, N. Lorenzo, E. Pedersen, A. von der Linden, Y. Zhang, et al. (TBC)
 }
 
 \setDocRef{SITCOMTN-161}
@@ -143,7 +143,7 @@ An important diagnostic for cluster weak lensing is to evaluate the contribution
 \begin{equation}
 \delta e_t = - \delta e_1  \cos(2 \phi) - \delta e_2  \sin(2 \phi),
 \end{equation}
-where $\phi$ is the position angle at the location of the computed residuals.
+where $\phi$ is the position angle at the location of the computed residuals\footnote{In the notebook supporting this note, this is done using the DESC CLMM code \citep{2021MNRAS.508.6092A}. To do so without relying on CLMM, we refer the reader to the following Rubin DP1 tutorial notebook: \url{https://dp1.lsst.io/tutorials/notebook/304/notebook-304-1.html}}.
 
 Figure~{\ref{fig:res_profile}} shows the corresponding binned radial profile as a function of the angular separation to the cluster center. The profile for PSF stars shows smaller error bars because of the larger number compared to the reserved set of the stars. The profiles are generally consistent with zero, but for a few radial bins where the amplitude is in any case more than an order of magnitude lower than the typical expected signal for the cluster with mass of A360 (see Section~\ref{sec:shear_profile}). 
 
@@ -175,15 +175,18 @@ For this cluster, the size scale is a few arcminutes. In the $\rho_2$ plot, we s
 From the tests above, it appears that the PSF modeling in the A360 field is sufficiently accurate not to hinder a first attempt at measuring the tangential and cross shear profiles around that cluster. The cross shear profile is a particularly useful null test to highlight remaining systematics effects. We therefore proceed to do so, using the \code{shapeHSM} ellipticities readily available in the object table (other shape measurements methods, such as \code{Metadetect} or \code{Anacal} will be explored elsewhere; see \citeds{SITCOMTN-162} for the \code{Metadetect} analysis). 
 
 For this preliminary work, we use a visual inspection of the $r-i$ versus $r$ color-magnitude diagram to select and remove red sequence galaxies from the sample. Source selection in other colors and using photoz is explored more thoroughly in \citeds{SITCOMTN-163}. 
-Given that the LSSTComCam field of A360 reaches roughly similar depth as HSC Y1 and uses a similar pipeline, we use the HSC Y1 lensing quality cuts and shear calibration procedure\footnote{The script to applied the calibration is available at \url{https://github.com/PrincetonUniversity/hsc-y1-shear-calib}. It was slightly adapted to use the column names from the object table.} \citep{2018MNRAS.481.3170M} to convert the e1 and e2 ellipticities into g1 and g2 shear estimates. Once the calibration has been applied, we use the DESC CLMM package \citep{2021MNRAS.508.6092A} to compute the tangential and cross reduced shear radial profiles, displayed in Figure~\ref{fig:shear_profile}. The physical distance on the x-axis is obtained from the angular separation assuming a default cosmology, and ranges from 0.4 Mpc to 6 Mpc (to match the circular 0.5 deg field highlighted in the PSF diagnostic plots at the upper end, and to avoid the cluster inner regions known to be affected by other sources of biases such as miscentering and sample contamination). 
+Given that the LSSTComCam field of A360 reaches roughly similar depth as HSC Y1 and uses a similar pipeline, we use the HSC Y1 lensing quality cuts and shear calibration procedure\footnote{The script to applied the calibration is available at \url{https://github.com/PrincetonUniversity/hsc-y1-shear-calib}. It was slightly adapted to use the column names from the object table.} \citep{2018MNRAS.481.3170M} to convert the e1 and e2 ellipticities into g1 and g2 shear estimates. Once the calibration has been applied, we use the DESC CLMM package \citep{2021MNRAS.508.6092A} to compute the tangential and cross reduced shear radial profiles with statistical error bars, displayed in Figure~\ref{fig:shear_profile}. 
+
+The physical distance on the x-axis is obtained from the angular separation assuming a default cosmology ($\Omega_m=0.3$, $h=0.7$), and ranges from 0.4 Mpc to 6 Mpc (to match the circular 0.5 deg field highlighted in the PSF diagnostic plots at the upper end, and to avoid the cluster inner regions known to be affected by other sources of biases such as miscentering and sample contamination). 
 
 \begin{figure}
 \centering
 \includegraphics[width=0.7\textwidth]{Figures/shear_profile.png}
-\caption{Binned tangential (blue) and cross (orange) reduced shear profile around A360. The green dashed line corresponds shows the expected signal for a NFW halo of mass similar to that of A360, a concentration $c=4$, and assumes the redshift distribution $n(z)$ of the DESC Science Requirement document. \label{fig:shear_profile}}
+\caption{Binned tangential (blue) and cross (orange) reduced shear profile around A360. The green dashed line shows the expected signal for a NFW halo of mass similar to that of A360, a concentration $c=4$, and assumes the redshift distribution $n(z)$ of the DESC Science Requirement document. \label{fig:shear_profile}}
 \end{figure}
 
-First, the cross shear signal, in orange, scatters around zero, indicating that no significant remaining systematics exists in the measurement. Second, we see a positive tangential shear signal, increasing towards the inner regions as expected. While this analysis is too preliminary to conclude on the robustness of the measured signal, we overplot in dashed green the expected signal from a NFW halo with the mass of A360, an assumed concentration c=4, and a source redshift distribution matching that of the DESC Science Requirements Document \citep{2018arXiv180901669T}; the actual photometric redshift distribution in that field (and of the DP1 data) is explored in \citeds{SITCOMTN-154}. We see that the measured tangential shear is in the ballpark of what one could expect with these simplifying assumptions, although more work is required to robustify this result.
+
+The WL measurements around individual clusters are inherently very noisy, as can be seen from the figure. Nonetheless, the cross shear signal, in orange, appears to scatter around zero over the whole redshift range. There is also a trend for a positive tangential shear signal, increasing towards the inner regions. While this analysis is too preliminary to conclude on the robustness of the measured signal, we overplot in dashed green the expected signal from a NFW halo with the mass of A360, an assumed concentration $c=4$, and a source redshift distribution (wrongly) assumed to be that of the DESC Science Requirements Document \citep{2018arXiv180901669T}; the actual photometric redshift distribution in that field (and of the DP1 data) is explored in \citeds{SITCOMTN-154}. We see that the measured tangential shear is in the ballpark of what one could expect with these simplifying assumptions, although more work is required to robustify this result.
 
 
 \section{Conclusion}
