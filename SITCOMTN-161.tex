@@ -85,7 +85,7 @@ All the tests performed hereafter rely on the coadded data from the tracts and p
 \begin{figure}
 \centering'
 \includegraphics[width=0.5\textwidth]{Figures/nimages.png}
-\caption{\emph{Left}: number of images used in the coadded data in the field of A360. \emph{Right}: modulus of the PSF ellipticity in the field. The dithering pattern appears clearly. {\color{red}[Redo figure better resolution/fontsize]}\label{fig:dither}}
+\caption{\emph{Left}: number of images used in the coadded data in the field of A360. \emph{Right}: modulus of the PSF ellipticity in the field. The dithering pattern appears clearly. {\color{red}[Redo figure better resolution]}\label{fig:dither}}
 \end{figure}
 
 
@@ -107,13 +107,13 @@ The figures in this note have been produced using the following:
 
 An accurate PSF model is essential for weak lensing studies. PSF model size errors result in an inaccurate correction for the dilution of the galaxy shear by the PSF convolution, which causes a coherent multiplicative bias in weak lensing shear; PSF model shape errors result in an inaccurate correction for the PSF shape, causing a coherent additive bias in weak lensing shear. Evaluating the performance of the PSF model on both aspects required comparing of the PSF model to the measurements of the PSF and reserved sets of stars.
 
-The second moments $I_{xx,xy,yy}$ measured on the objects and of the PSF model lie at the core of shape measurements, as they are the fundamental quantities from which ellipticities, sizes, and PSF corrections are derived in weak lensing analyses. We refer the reader to \citet{} (CITE) for a pedagogical overview and provide here the main quantities needed in this note.   
+The second moments $I_{xx,xy,yy}$ measured on the objects and of the PSF model lie at the core of shape measurements used in weak lensing analyses. We refer the reader to \citet{2014ApJS..212....5M} for a pedagogical overview and provide here the main quantities needed in this note.   
 
 From the second moment matrix expressed in the (x,y) frame of the tracts, we define the trace 
 \begin{equation}
 T = I_{xx} + I_{yy}\;,
 \end{equation}
-that provides an estimate of the size.
+that provides an estimate of the size of the object.
 
 In addition, the shape of an object can be described by its complex ellipticity, $e=e_1+i e_2$, the components of which relates to the the second moments as
 \begin{eqnarray}
@@ -127,7 +127,7 @@ From these, we compute the residuals between the measurements for the set of PSF
 \delta T &=& T^{\rm meas} - T^{\rm model} 
 \end{eqnarray}
 
-The ellipticity can also be written as $e = |e| \exp(2i\theta)$, where$|e|$ is the modulus of the ellipticity and $\theta$ the orientation of the major axis of the ellipse with respect to the x axis. They are expressed from $e_1$ and $e_2$ as follows
+The ellipticity can equivalently be written as $e = |e| \exp(2i\theta)$, where$|e|$ is the modulus of the ellipticity and $\theta$ the orientation of the major axis of the ellipse with respect to the x axis. They are expressed from $e_1$ and $e_2$ as follows
 \begin{equation} 
 |e| = \sqrt{e_1^2 + e_2^2}
 \label{eq:modulus}
@@ -142,13 +142,13 @@ Before looking into the residuals in the next section, Figure~\ref{fig:T_and_e} 
 
 \begin{figure}
 \centering
-\includegraphics[width=0.85\textwidth]{Figures/T_and_e.png}
-\caption{\emph{Left}: PSF size (trace) across the field. \emph{Right}: modulus of the PSF ellipticity in the field. {\color{red}[Redo figure better resolution/fontsize]}\label{fig:T_and_e}}
+\includegraphics[width=\textwidth]{Figures/T_and_e.png}
+\caption{\emph{Left}: PSF size (trace) across the field. \emph{Right}: modulus of the PSF ellipticity in the field. {\color{red}[Redo figure better resolution]}\label{fig:T_and_e}}
 \end{figure}  
 
 
 \subsection{PSF residuals - distributions and whisker plots}
-To assess the performance of the PSF model, a first test consists in comparing the normalized distribution of the residuals defined above, for the PSF and reserved stars, to check for a possible overfitting of the PSF model \citep{2025OJAp....8E..26S}. As can be seen in Figure~\ref{fig:residual_distrib} (left and middle panels), the ellipticity residuals peak around zero and extend to $\sim 0.02$. The right panel shows the relative residuals of the trace, peaking around zero and not exceeding $\sim 5 \%$. The residuals obtained from the PSF stars and reserved stars behave similarly, so there is no indication of any overfitting of the PSF model.
+To assess the performance of the PSF model, a first test consists in comparing the normalized distribution of the residuals defined above, for the PSF and reserved stars, to check for a possible overfitting of the PSF model (e.g., \citealp{2025OJAp....8E..26S}). As can be seen in Figure~\ref{fig:residual_distrib} (left and middle panels), the ellipticity residuals peak around zero and extend to $\sim 0.02$. The right panel shows the relative residuals of the trace, peaking around zero and not exceeding $\sim 5 \%$. The residuals obtained from the PSF stars and reserved stars behave similarly, so there is no indication of any overfitting of the PSF model.
 {\color{red} Expand to explain on the size residuals and explain why we don't expect them to be an issue.}
 
 \begin{figure}
