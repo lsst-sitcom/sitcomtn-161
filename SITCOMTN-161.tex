@@ -36,7 +36,7 @@ C. Combet, A. Plazas Malagón, S. Fu, P. Adari, I. Dell'Antonio, A. Englert, M. 
 % \setDocCurator{The Curator of this Document}
 
 \setDocAbstract{%
-The Rubin LSSTComCam on-sky campaign performed at the end of 2024 provided observations of the Abell 360 galaxy cluster; these data allow a preliminary study of cluster weak lensing analysis using Rubin Data Preview 1 (DP1) data. Among all the steps required for such analyses, accurate modeling of the PSF is essential. This work uses several diagnostics, mostly based on the residuals between the second moments of stars and the PSF model, to characterize the accuracy of the PSF modeling in the A360 field. We find the level of the residuals to be sufficiently low not to hinder the measurement of the tangential shear profile around A360. With a simple source selection process, we demonstrate that outputs of the LSST Science Pipelines can be used to detect the tangential shear profile in Abell 360 at the 3.3$\sigma$ level, and our analysis indicates that contamination from PSF modeling systematics is negligible.
+The Rubin LSSTComCam on-sky campaign performed at the end of 2024 provided observations of the Abell 360 galaxy cluster; these data allow a preliminary study of cluster weak lensing analysis using Rubin Data Preview 1 (DP1) data. Among all the steps required for such analyses, accurate modeling of the PSF is essential. This work uses several diagnostics, mostly based on the residuals between the second moments of stars and the PSF model, to characterize the accuracy of the PSF modeling in the A360 field. We find the level of the residuals to be sufficiently low not to hinder the measurement of the tangential shear profile around A360. With a simple source selection process, we demonstrate that outputs of the LSST Science Pipelines can be used to detect the tangential shear profile in Abell 360 at the 3.6$\sigma$ level, and our analysis indicates that contamination from PSF modeling systematics is negligible.
 }
 
 % Change history defined here.
@@ -85,7 +85,7 @@ All the tests performed hereafter rely on the coadded data from the tracts and p
 \begin{figure}
 \centering'
 \includegraphics[width=0.5\textwidth]{Figures/nimages.png}
-\caption{\emph{Left}: number of images used in the coadded data in the field of A360. \emph{Right}: modulus of the PSF ellipticity in the field. The dithering pattern appears clearly. {\color{red}[Redo figure better resolution]}\label{fig:dither}}
+\caption{\emph{Left}: number of images used in the coadded data in the field of A360. \emph{Right}: modulus of the PSF ellipticity in the field. The dithering pattern appears clearly. {\color{red}}\label{fig:dither}}
 \end{figure}
 
 
@@ -143,13 +143,13 @@ Before looking into the residuals in the next section, Figure~\ref{fig:T_and_e} 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{Figures/T_and_e.png}
-\caption{\emph{Left}: PSF size (trace) across the field. \emph{Right}: modulus of the PSF ellipticity in the field. {\color{red}[Redo figure better resolution]}\label{fig:T_and_e}}
+\caption{\emph{Left}: PSF size (trace) across the field. \emph{Right}: modulus of the PSF ellipticity in the field. \label{fig:T_and_e}}
 \end{figure}  
 
 
 \subsection{PSF residuals - distributions and whisker plots}
 To assess the performance of the PSF model, a first test consists in comparing the normalized distribution of the residuals defined above, for the PSF and reserved stars, to check for a possible overfitting of the PSF model (e.g., \citealp{2025OJAp....8E..26S}). As can be seen in Figure~\ref{fig:residual_distrib} (left and middle panels), the ellipticity residuals peak around zero and extend to $\sim 0.02$. The right panel shows the relative residuals of the trace, peaking around zero and not exceeding $\sim 5 \%$. The residuals obtained from the PSF stars and reserved stars behave similarly, so there is no indication of any overfitting of the PSF model.
-{\color{red} Expand to explain on the size residuals and explain why we don't expect them to be an issue.}
+{\color{red} Expand a bit on the size residuals.}
 
 \begin{figure}
 \includegraphics[width=\textwidth]{Figures/residual_histograms.png}
@@ -206,25 +206,25 @@ We used the set of reserved stars to calculate the rho statistics in the $i$-ban
 From the tests above, it appears that the PSF modeling in the A360 field is sufficiently accurate not to hinder a first attempt at measuring the tangential and cross shear profiles around that cluster. The cross shear profile, which has no contribution from lensing when azimuthally averaged around the cluster center, is a particularly useful null test to highlight remaining systematics effects. We therefore proceed to do so, using the \code{shapeHSM} ellipticities readily available in the object table (other shape measurements methods, such as \code{Metadetect} or \code{Anacal} will be explored elsewhere; see \citeds{SITCOMTN-162} for the \code{Metadetect} analysis). 
 
 For this preliminary work, we use a visual inspection of the $r-i$ versus $r$ color-magnitude diagram to select and remove red sequence galaxies from the sample. Source selection in other colors and using photoz is explored more thoroughly in \citeds{SITCOMTN-163}. 
-Given that the LSSTComCam field of A360 reaches roughly similar depth as HSC Y1 and uses a similar pipeline, we use the HSC Y1 lensing quality cuts; with these cuts, the source galaxy density is $n_{\rm gal}\approx 8\;{\rm arcmin}^{-2}$.  With then use the shear calibration procedure\footnote{The script to applied the calibration is available at \url{https://github.com/PrincetonUniversity/hsc-y1-shear-calib}. It was slightly adapted to use the column names from the object table.} \citep{2018MNRAS.481.3170M} to convert the $e_1$ and $e_2$ ellipticities into $g_1$ and $g_2$ shear estimates. 
+Given that the LSSTComCam field of A360 reaches roughly similar depth as HSC Y1 and uses a similar pipeline, we use the HSC Y1 lensing quality cuts; with these cuts, the source galaxy density is $n_{\rm gal}\approx 7-8\;{\rm arcmin}^{-2}$.  With then use the shear calibration procedure\footnote{The script to applied the calibration is available at \url{https://github.com/PrincetonUniversity/hsc-y1-shear-calib}. It was slightly adapted to use the column names from the object table.} \citep{2018MNRAS.481.3170M} to convert the $e_1$ and $e_2$ ellipticities into $g_1$ and $g_2$ shear estimates. 
 
-Once the calibration has been applied, we use the DESC CLMM package \citep{2021MNRAS.508.6092A} to compute the tangential and cross reduced shear radial profiles with statistical error bars, displayed in Figure~\ref{fig:shear_profile}. The physical distance on the x-axis is obtained from the angular separation assuming a default cosmology ($\Omega_m=0.3$, $h=0.7$), and ranges from 0.4 Mpc to 6 Mpc (to match the circular 0.5 deg field highlighted in the PSF diagnostic plots at the upper end, and to avoid the cluster inner regions known to be affected by other sources of biases such as miscentering and sample contamination). 
+Once the calibration has been applied, we use the DESC CLMM package \citep{2021MNRAS.508.6092A} to compute the tangential and cross reduced shear radial profiles with statistical error bars, displayed in Figure~\ref{fig:shear_profile}. The physical distance on the x-axis is obtained from the angular separation assuming a default cosmology ($\Omega_m=0.3$, $h=0.7$), and ranges from 0.5 Mpc to 6 Mpc (to match the circular 0.5 deg field highlighted in the PSF diagnostic plots at the upper end, and to avoid the cluster inner regions known to be affected by other sources of biases such as miscentering and sample contamination). 
 
 \begin{figure}
 \centering
 \includegraphics[width=0.7\textwidth]{Figures/shear_profile.png}
-\caption{Binned tangential (blue) and cross (orange) reduced shear profile around A360. The green dashed line shows the expected signal for a NFW halo of mass similar to that of A360, a concentration $c=4$, and assumes the redshift distribution $n(z)$ of the DESC Science Requirement document. \label{fig:shear_profile}}
+\caption{Binned tangential (blue) and cross (orange) reduced shear profile around A360. The green dashed line shows the expected signal for a NFW halo of mass similar to that of A360, a concentration $c=4$, and (wrongly) assumes the Y10 redshift distribution $n(z)$ from the DESC Science Requirement document. \label{fig:shear_profile}}
 \end{figure}
 
 
-Due to the small galaxy sample size, the WL measurements around individual clusters are inherently very noisy, as can be seen from the figure. Nonetheless, the cross shear signal, in orange, appears to scatter around zero over the whole redshift range. We also see a trend for a positive tangential shear signal, increasing towards the inner regions. Computing the $p$-values for both the tangential and cross signals, we find evidence of a tangential shear signal around the cluster at $3.3\sigma$ significance ($p = 4.1 \times 10^{-4}$), while the cross shear is consistent with zero ($p = 0.4$).
+Due to the small galaxy sample size, the WL measurements around individual clusters are inherently very noisy, as can be seen from the figure. Nonetheless, the cross shear signal, in orange, appears to scatter around zero over the whole redshift range. We also see a trend for a positive tangential shear signal, increasing towards the inner regions. Computing the $p$-values for both the tangential and cross signals, we find evidence of a tangential shear signal around the cluster at $3.6\sigma$ significance ($p = 1.4 \times 10^{-4}$), while the cross shear is consistent with zero ($p = 0.87$).
 
-While this analysis is too preliminary to conclude on the robustness of the measured signal, we overplot in dashed green the expected signal from a NFW halo with the mass of A360, an assumed concentration $c=4$, and a source redshift distribution (wrongly) assumed to be that of the DESC Science Requirements Document \citep{2018arXiv180901669T}; the actual photometric redshift distribution in that field (and of the DP1 data) is explored in \citeds{SITCOMTN-154}. We see that the measured tangential shear is in the ballpark of what one could expect with these simplifying assumptions, although more work is required to robustify this result.
+While this analysis is too preliminary to conclude on the robustness of the measured signal, we overplot in dashed green the expected signal from a NFW halo with the mass of A360, an assumed concentration $c=4$, and a (wrongly) assumed Y10 source redshift distribution\footnote{The Y10 SRD n(z) is pre-coded and readily available in CLMM.} from the DESC Science Requirements Document \citep{2018arXiv180901669T}; the actual photometric redshift distribution in that field (and of the DP1 data) is explored in \citeds{SITCOMTN-154}. We see that the measured tangential shear is in the ballpark of what one could expect with these simplifying assumptions, although more work is required to robustify this result.
 
 
 \section{Conclusion}
 \label{sec:conclusion}
-We have checked the PSF model in the field of the galaxy cluster A360, which was observed in the low ecliptic latitude field of the Rubin 2024 LSSTComCam campaign. While the PSF ellipticity reaches values as high as >~0.2 in the coadded data, we find that the model is able to capture and correct the PSF, at a level sufficient to enable the measurement of the shear profile around A360.
+We have checked the PSF model in the field of the galaxy cluster A360, which was observed in the low ecliptic latitude field of the Rubin 2024 LSSTComCam campaign. While the PSF ellipticity reaches values as high as >~0.2 in the coadded data, we find that the model is able to capture and correct the PSF, at a level sufficient to enable the measurement of the shear profile around A360, which we detect with a 3.6$\sigma$ significance.
 
 
 \appendix
