@@ -85,7 +85,7 @@ All the tests performed hereafter rely on the coadded data from the tracts and p
 \begin{figure}
 \centering'
 \includegraphics[width=0.5\textwidth]{Figures/nimages.png}
-\caption{\emph{Left}: number of images used in the coadded data in the field of A360. \emph{Right}: modulus of the PSF ellipticity in the field. The dithering pattern appears clearly. {\color{red}}\label{fig:dither}}
+\caption{Number of images used in the coadded data in the field of A360.\label{fig:dither}}
 \end{figure}
 
 
@@ -105,7 +105,7 @@ The figures in this note have been produced using the following:
 \section{PSF properties and diagnostics}
 \label{sec:tests}
 
-An accurate PSF model is essential for weak lensing studies. PSF model size errors result in an inaccurate correction for the dilution of the galaxy shear by the PSF convolution, which causes a coherent multiplicative bias in weak lensing shear; PSF model shape errors result in an inaccurate correction for the PSF shape, causing a coherent additive bias in weak lensing shear. Evaluating the performance of the PSF model on both aspects required comparing of the PSF model to the measurements of the PSF and reserved sets of stars.
+An accurate PSF model is essential for weak lensing studies. Briefly, PSF model size errors result in an inaccurate correction for the dilution of the galaxy shear by the PSF convolution, which causes a coherent multiplicative bias in weak lensing shear; PSF model shape errors result in an inaccurate correction for the PSF shape, causing a coherent additive bias in weak lensing shear. Evaluating the performance of the PSF model on both aspects required comparing of the PSF model to the measurements of the PSF and reserved sets of stars. We refer the reader to the PSF-related studies carried out to validate the shape catalogs of stage~III galaxy surveys (e.g. \citealp{2018PASJ...70S..25M, 2022PASJ...74..421L} for HSC; \citealp{2016MNRAS.460.2245J, 2018MNRAS.481.1149Z, 2021MNRAS.504.4312G} for DES) for a more comprehensive view than what we cover in this note.
 
 The second moments $I_{xx,xy,yy}$ measured on the objects and of the PSF model lie at the core of shape measurements used in weak lensing analyses. We refer the reader to \citet{2014ApJS..212....5M} for a pedagogical overview and provide here the main quantities needed in this note.   
 
@@ -140,6 +140,8 @@ The ellipticity can equivalently be written as $e = |e| \exp(2i\theta)$, where$|
 
 Before looking into the residuals in the next section, Figure~\ref{fig:T_and_e} displays the modulus of the PSF model size (left) and ellipticity (right) in the field. While the mean ellipticity across the field is ~0.07, there are several areas where the PSF ellipticity reaches significant values. This could be investigated further by checking the PSF at the individual visit level; this goes however beyond the scope of this technote which aims at checking, in the next section, whether the PSF modeling is sufficient for the purpose of measuring a lensing profile around A360.
 
+
+
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{Figures/T_and_e.png}
@@ -149,12 +151,14 @@ Before looking into the residuals in the next section, Figure~\ref{fig:T_and_e} 
 
 \subsection{PSF residuals - distributions and whisker plots}
 To assess the performance of the PSF model, a first test consists in comparing the normalized distribution of the residuals defined above, for the PSF and reserved stars, to check for a possible overfitting of the PSF model (e.g., \citealp{2025OJAp....8E..26S}). As can be seen in Figure~\ref{fig:residual_distrib} (left and middle panels), the ellipticity residuals peak around zero and extend to $\sim 0.02$. The right panel shows the relative residuals of the trace, peaking around zero and not exceeding $\sim 5 \%$. The residuals obtained from the PSF stars and reserved stars behave similarly, so there is no indication of any overfitting of the PSF model.
-{\color{red} Expand a bit on the size residuals.}
 
 \begin{figure}
 \includegraphics[width=\textwidth]{Figures/residual_histograms.png}
 \caption{Normalised distributions of the ellipticity residuals $\delta e_1$ (left), $\delta e_2$ (right), and of the relative residuals $\delta T/T$ (right). The distributions are shown for the PSF (blue) and reserved (orange) sets of stars. \label{fig:residual_distrib}}
 \end{figure}
+
+Following \citet{2004MNRAS.353..529H, 2018PASJ...70S..25M}, a PSF model size error $\delta T$ yields a shear calibration (multiplicative bias) uncertainty $\delta m = -(R_2^{-1} -1)\; \delta T/T$, where $R_2$ is the so-called resolution factor\footnote{The resolution factor, $R_2 = 1 -\frac{T^{\rm PSF}}{T_{\rm gal}}$, tends to zero for poorly-resolved galaxies and to 1 for well-resolved ones.}. In the right panel of Figure~\ref{fig:residual_distrib}, the mean value of the reserved stars distribution is $\langle \delta T/T \rangle = 0.002$. Combined with a conservative mean value\footnote{For the source galaxy sample used in Section~\ref{sec:shear_profile}, that were requesting $R_2 > 0.3$, we find $\langle R_2^{-1} -1 \rangle = 0.96$.} 
+$\langle R_2^{-1} -1 \rangle = 1$, we get $\langle \delta m \rangle = 0.002$; this on par with the typical requirements for $3 \times 2$-point analyses \citep{2018arXiv180901669T}, which are more demanding the use case of galaxy cluster lensing we are considering here.
 
 
 \begin{figure}
@@ -164,7 +168,6 @@ To assess the performance of the PSF model, a first test consists in comparing t
 \end{figure}
 
 Figure~\ref{fig:whiskers} shows the variation of the PSF ellipticity and residuals across the field of A360. Each whisker is oriented according the direction of the ellipse major axis ($\theta$, Eq.(\ref{eq:theta})) and its length is proportional to the ellipticity modulus ($|e|$, Eq.(\ref{eq:modulus})); this is done for the PSF stars (top row) or reserved stars (bottom row). The left panel corresponds the measurements on the star themselves, the middle panel shows the corresponding PSF model, and the residuals are displayed in the right panel. A reference whisker is given for an ellipticity $|e| = 0.1$. Visually, the residuals (right panel) display no coherent pattern, which combined with the fact that they appear symmetrically distributed around zero in Figure~\ref{fig:residual_distrib}, suggests a good performance of the PSF model. We will quantify whether this is satisfactory and sufficient for the purpose of measuring the shear signal around A360 below.
-%Looking at the residuals (right panel), we conclude that the PSF model performs satisfactorily, in particular as it is successful at correcting the coherent ellipticity patterns seen across the field.
 
 
 \subsection{PSF residuals - tangential shear profile}
@@ -173,7 +176,8 @@ An important diagnostic for cluster weak lensing is to evaluate the contribution
 \begin{equation}
 \delta e_t = - \delta e_1  \cos(2 \phi) - \delta e_2  \sin(2 \phi),
 \end{equation}
-where $\phi$ is the position angle (with respect to the cluster center) at the location of the computed residuals\footnote{In the notebook supporting this note, this is done using the DESC CLMM code \citep{2021MNRAS.508.6092A}. To do so without relying on CLMM, we refer the reader to the following Rubin DP1 tutorial notebook: \url{https://dp1.lsst.io/tutorials/notebook/304/notebook-304-1.html}}. This provides an estimate of the additive bias in the tangential shear signal resulting from residuals in the PSF modeling.
+where $\phi$ is the position angle (with respect to the cluster center) at the location of the computed residuals%\footnote{In the notebook supporting this note, this is done using the DESC CLMM code \citep{2021MNRAS.508.6092A}. To do so without relying on CLMM, we refer the reader to the following Rubin DP1 tutorial notebook: \url{https://dp1.lsst.io/tutorials/notebook/304/notebook-304-1.html}}. 
+This provides an estimate of the additive bias in the tangential shear signal resulting from residuals in the PSF modeling.
 
 Figure~{\ref{fig:res_profile}} shows the corresponding binned radial profile (and corresponding statistical errors) as a function of the angular separation from the cluster center. The profile for PSF stars shows smaller error bars because of the larger number compared to the reserved set of the stars. The profiles are broadly consistent with zero on all scales given the errorbars (e.g, p-value $p=0.2$ for the reserved set of stars). 
 
@@ -185,7 +189,7 @@ Figure~{\ref{fig:res_profile}} shows the corresponding binned radial profile (an
 
 
 \subsection{PSF rho-statistics}
-The $\rho$-statistics \citep{2010MNRAS.404..350R, 2016MNRAS.460.2245J} are a set of two-point correlation functions involving PSF ellipticity and size residuals. They quantify spatially-correlated errors in PSF modeling and contributions from PSF leakage. We use the LSST Science Pipelines \code{analysis\_tools}\footnote{\url{https://pipelines.lsst.io/v/daily/modules/lsst.analysis.tools}} implementation to compute the $\rho$-statistics, which internally relies on the TreeCorr software package \citep{2015ascl.soft08007J} for the correlation function calculations. The definitions of the $\rho$-statistics as calculated by \code{analysis\_tools} are documented in the LSST science pipelines and include those originally introduced by \citet{2010MNRAS.404..350R, 2016MNRAS.460.2245J}, as well as an additional one defined in the context of cluster analysis by \citet{2015MNRAS.449.2219M}.
+The $\rho$-statistics \citep{2010MNRAS.404..350R, 2016MNRAS.460.2245J} are a set of two-point correlation functions involving PSF ellipticity and size residuals. They quantify spatially-correlated errors in PSF modeling and contributions from PSF leakage, that yield additive biases to the shear estimation. We use the LSST Science Pipelines \code{analysis\_tools}\footnote{\url{https://pipelines.lsst.io/v/daily/modules/lsst.analysis.tools}} implementation to compute the $\rho$-statistics, which internally relies on the TreeCorr software package \citep{2015ascl.soft08007J} for the correlation function calculations. The definitions of the $\rho$-statistics as calculated by \code{analysis\_tools} are documented in the LSST science pipelines and include the $\rho_1$ to $\rho_5$ originally introduced by \citet{2010MNRAS.404..350R, 2016MNRAS.460.2245J}, as well as $\rho_{3^\prime}$ defined in the context of cluster analysis by \citet{2015MNRAS.449.2219M}.
 
 We used the set of reserved stars to calculate the rho statistics in the $i$-band, and display the results in Figure~\ref{fig:rho_stat}.
 
@@ -194,6 +198,8 @@ We used the set of reserved stars to calculate the rho statistics in the $i$-ban
 \includegraphics[width=\textwidth]{Figures/rho_stat_noband.png}
 \caption{The various $\rho$-statistics correlations as a function of separation, as produced by the Rubin \code{AnalysisTools} software.\label{fig:rho_stat}}
 \end{figure}
+
+
 
 {\color{red} TODO: describe and conclude on rho-stat}
 
