@@ -189,9 +189,13 @@ Figure~{\ref{fig:res_profile}} shows the corresponding binned radial profile (an
 
 
 \subsection{PSF rho-statistics}
-The $\rho$-statistics \citep{2010MNRAS.404..350R, 2016MNRAS.460.2245J} are a set of two-point correlation functions involving PSF ellipticity and size residuals. They quantify spatially-correlated errors in PSF modeling and contributions from PSF leakage, that yield additive biases to the shear estimation. We use the LSST Science Pipelines \code{analysis\_tools}\footnote{\url{https://pipelines.lsst.io/v/daily/modules/lsst.analysis.tools}} implementation to compute the $\rho$-statistics, which internally relies on the TreeCorr software package \citep{2015ascl.soft08007J} for the correlation function calculations. The definitions of the $\rho$-statistics as calculated by \code{analysis\_tools} are documented in the LSST science pipelines and include the $\rho_1$ to $\rho_5$ originally introduced by \citet{2010MNRAS.404..350R, 2016MNRAS.460.2245J}, as well as $\rho_{3^\prime}$ defined in the context of cluster analysis by \citet{2015MNRAS.449.2219M}.
+The $\rho$-statistics \citep{2010MNRAS.404..350R, 2016MNRAS.460.2245J} are a set of two-point correlation functions involving PSF ellipticity and size residuals, $\delta e$ and $\delta T$. They quantify spatially-correlated errors in PSF modeling and contributions from PSF leakage, that yield additive biases to the shear estimation. These statistics are particularly relevant to cosmic shear studies and specific requirements have been in this context in the litterature (e.g., \citealp{2018PASJ...70S..25M, 2022PASJ...74..421L} for HSC,  \citealp{2018MNRAS.481.1149Z, 2021MNRAS.504.4312G} for DES). 
 
-We used the set of reserved stars to calculate the rho statistics in the $i$-band, and display the results in Figure~\ref{fig:rho_stat}.
+We use the LSST Science Pipelines \code{analysis\_tools}\footnote{\url{https://pipelines.lsst.io/v/daily/modules/lsst.analysis.tools}} implementation to compute the $\rho$-statistics, which internally relies on the TreeCorr software package \citep{2015ascl.soft08007J} for the correlation function calculations. The definitions of the $\rho$-statistics as calculated by \code{analysis\_tools} are documented in the LSST science pipelines and include the $\rho_1$ to $\rho_5$ originally introduced by \citet{2010MNRAS.404..350R, 2016MNRAS.460.2245J}, as well as $\rho_{3^\prime}$ defined in the context of cluster analysis by \citet{2015MNRAS.449.2219M}.
+
+We used the set of reserved stars to calculate the rho statistics in the $i$-band, up to 40 arcmin (i.e. the region of interest for A360 WL measurement) and display the results in Figure~\ref{fig:rho_stat}. We consider the Y1 and Y3 HSC requirements for cosmic shear (see Figure~26 in \citealp{2022PASJ...74..421L}) as a first point of comparison to the $\rho_1$ to $\rho_5$-statistics computed here, noting that cluster lensing would generally be less demanding that cosmic shear because of the order of magnitude larger signal we expect. 
+
+
 
 \begin{figure}
 \centering
@@ -199,9 +203,8 @@ We used the set of reserved stars to calculate the rho statistics in the $i$-ban
 \caption{The various $\rho$-statistics correlations as a function of separation, as produced by the Rubin \code{AnalysisTools} software.\label{fig:rho_stat}}
 \end{figure}
 
+In the field of A360, with this commissioning data set, we find that $\rho_1$ and $\rho_2$ are typically at the level of the Y1 HSC cosmic shear requirements, while $\rho_3$, $\rho_4$, and $\rho_5$ already fulfill the more stringent HSC Y3 requirements \footnote{$\rho_1$, $\rho_2$ and $\rho_{3^\prime}$ are also well below the tolerances estimated in the early work of \citet{2015MNRAS.449.2219M} to measure cluster WL signals with the DES science verification data.}. We are therefore confident that the corresponding additive biases would be sufficiently low for the WL analysis of A360\footnote{Figure~26 in \citet{2022PASJ...74..421L} used as comparison started from 3~arcmin only, and so more specific cluster-related considerations may be needed for the smaller scales down to which we measure cluster weak lensing.}.
 
-
-{\color{red} TODO: describe and conclude on rho-stat}
 
 % For this cluster, the size scale is a few arcminutes. In the $\rho_2$ plot, we see that the PSF shape modeling bias (square root of $\rho_2$) is $\lesssim 10^{-3}$ at the cluster length scale that we are interested in. We note that the typical shear is $\sim 3\times10^{-2}$ (see Figure~\ref{fig:shear_profile}). Thus, the PSF modeling bias is $\sim <0.3/3=10$, i.e. one order of magnitude lower than the shear. This is consistent with our previous conclusion, which means the bias is sufficiently small in our shear measurement.
 
