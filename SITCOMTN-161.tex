@@ -105,7 +105,7 @@ The figures in this note have been produced using the following:
 \section{PSF properties and diagnostics}
 \label{sec:tests}
 
-An accurate PSF model is essential for weak lensing studies. Briefly, PSF model size errors result in an inaccurate correction for the dilution of the galaxy shear by the PSF convolution, which causes a coherent multiplicative bias in weak lensing shear; PSF model shape errors result in an inaccurate correction for the PSF shape, causing a coherent additive bias in weak lensing shear. Evaluating the performance of the PSF model on both aspects required comparing of the PSF model to the measurements of the PSF and reserved sets of stars. We refer the reader to the PSF-related studies carried out to validate the shape catalogs of stage~III galaxy surveys (e.g. \citealp{2018PASJ...70S..25M, 2022PASJ...74..421L} for HSC; \citealp{2016MNRAS.460.2245J, 2018MNRAS.481.1149Z, 2021MNRAS.504.4312G} for DES) for a more comprehensive view than what we cover in this note.
+An accurate PSF model is essential for weak lensing studies. Briefly, PSF model size errors result in an inaccurate correction for the dilution of the galaxy shear by the PSF convolution, which causes a coherent multiplicative bias in weak lensing shear; PSF model shape errors result in an inaccurate correction for the PSF shape, causing a coherent additive bias in weak lensing shear. Evaluating the performance of the PSF model on both aspects required comparing the PSF model to the measurements of the PSF and reserved sets of stars. We refer the reader to the PSF-related studies carried out to validate the shape catalogs of stage~III galaxy surveys (e.g. \citealp{2018PASJ...70S..25M, 2022PASJ...74..421L} for HSC; \citealp{2016MNRAS.460.2245J, 2018MNRAS.481.1149Z, 2021MNRAS.504.4312G} for DES) for a more comprehensive view than what we cover in this note.
 
 The second moments $I_{xx,xy,yy}$ measured on the objects and of the PSF model lie at the core of shape measurements used in weak lensing analyses. We refer the reader to \citet{2014ApJS..212....5M} for a pedagogical overview and provide here the main quantities needed in this note.   
 
@@ -127,7 +127,7 @@ From these, we compute the residuals between the measurements for the set of PSF
 \delta T &=& T^{\rm meas} - T^{\rm model} 
 \end{eqnarray}
 
-The ellipticity can equivalently be written as $e = |e| \exp(2i\theta)$, where$|e|$ is the modulus of the ellipticity and $\theta$ the orientation of the major axis of the ellipse with respect to the x axis. They are expressed from $e_1$ and $e_2$ as follows
+The ellipticity can equivalently be written as $e = |e| \exp(2i\theta)$, where $|e|$ is the modulus of the ellipticity and $\theta$ the orientation of the major axis of the ellipse with respect to the x axis. They are expressed from $e_1$ and $e_2$ as follows
 \begin{equation} 
 |e| = \sqrt{e_1^2 + e_2^2}
 \label{eq:modulus}
@@ -138,7 +138,7 @@ The ellipticity can equivalently be written as $e = |e| \exp(2i\theta)$, where$|
 \end{equation}
 
 
-Before looking into the residuals in the next section, Figure~\ref{fig:T_and_e} displays the modulus of the PSF model size (left) and ellipticity (right) in the field. While the mean ellipticity across the field is ~0.07, there are several areas where the PSF ellipticity reaches significant values. This could be investigated further by checking the PSF at the individual visit level; this goes however beyond the scope of this technote which aims at checking, in the next section, whether the PSF modeling is sufficient for the purpose of measuring a lensing profile around A360.
+Before looking into the residuals in the next section, Figure~\ref{fig:T_and_e} displays the PSF model trace $T$ (left) and the modulus of ellipticity $|e|$ (right) in the field. While the mean ellipticity across the field is ~0.07, there are several areas where the PSF ellipticity reaches significant values. This could be investigated further by checking the PSF at the individual visit level; this goes however beyond the scope of this technote which aims at checking, in the next section, whether the PSF modeling is sufficient for the purpose of measuring a lensing profile around A360.
 
 
 
@@ -172,12 +172,12 @@ Figure~\ref{fig:whiskers} shows the variation of the PSF ellipticity and residua
 
 \subsection{PSF residuals - tangential shear profile}
 
-An important diagnostic for cluster weak lensing is to evaluate the contribution of the PSF residuals to the tangential shear signal. To do so, we compute the tangential component of the residual ellipticity, $\delta e_t$, analogously to the way the shear signal is estimated around a cluster, namely 
+An important diagnostic for cluster weak lensing is to evaluate the contribution of the PSF residuals to the tangential shear signal. To do so, we compute the tangential component of the residual ellipticity, $\delta e_t$, analogously to the way the tangential shear signal is estimated around a cluster, namely 
 \begin{equation}
 \delta e_t = - \delta e_1  \cos(2 \phi) - \delta e_2  \sin(2 \phi),
 \end{equation}
-where $\phi$ is the position angle (with respect to the cluster center) at the location of the computed residuals%\footnote{In the notebook supporting this note, this is done using the DESC CLMM code \citep{2021MNRAS.508.6092A}. To do so without relying on CLMM, we refer the reader to the following Rubin DP1 tutorial notebook: \url{https://dp1.lsst.io/tutorials/notebook/304/notebook-304-1.html}}. 
-This provides an estimate of the additive bias in the tangential shear signal resulting from residuals in the PSF modeling.
+where $\phi$ is the position angle (with respect to the cluster center) at the location of the computed residuals. %\footnote{In the notebook supporting this note, this is done using the DESC CLMM code \citep{2021MNRAS.508.6092A}. To do so without relying on CLMM, we refer the reader to the following Rubin DP1 tutorial notebook: \url{https://dp1.lsst.io/tutorials/notebook/304/notebook-304-1.html}}. 
+ This provides an estimate of the additive bias in the tangential shear signal resulting from residuals in the PSF modeling.
 
 Figure~{\ref{fig:res_profile}} shows the corresponding binned radial profile (and corresponding statistical errors) as a function of the angular separation from the cluster center. The profile for PSF stars shows smaller error bars because of the larger number compared to the reserved set of the stars. The profiles are broadly consistent with zero on all scales given the errorbars (e.g, p-value $p=0.2$ for the reserved set of stars). 
 
