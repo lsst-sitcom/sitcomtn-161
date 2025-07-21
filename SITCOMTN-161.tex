@@ -158,7 +158,7 @@ To assess the performance of the PSF model, a first test consists in comparing t
 \end{figure}
 
 Following \citet{2004MNRAS.353..529H, 2018PASJ...70S..25M}, a PSF model size error $\delta T$ yields a shear calibration (multiplicative bias) uncertainty $\delta m = -(R_2^{-1} -1)\; \delta T/T$, where $R_2$ is the so-called resolution factor\footnote{The resolution factor, $R_2 = 1 -\frac{T^{\rm PSF}}{T_{\rm gal}}$, tends to zero for poorly-resolved galaxies and to 1 for well-resolved ones.}. In the right panel of Figure~\ref{fig:residual_distrib}, the mean value of the reserved stars distribution is $\langle \delta T/T \rangle = 0.002$. Combined with a conservative mean value\footnote{For the source galaxy sample used in Section~\ref{sec:shear_profile}, that were requesting $R_2 > 0.3$, we find $\langle R_2^{-1} -1 \rangle = 0.96$.} 
-$\langle R_2^{-1} -1 \rangle = 1$, we get $\langle \delta m \rangle = 0.002$; this on par with the typical requirements for $3 \times 2$-point analyses \citep{2018arXiv180901669T}, which are more demanding the use case of galaxy cluster lensing we are considering here.
+$\langle R_2^{-1} -1 \rangle = 1$, we get $\langle \delta m \rangle = 0.002$; this on par with the typical requirements for $3 \times 2$-point analyses \citep{2018arXiv180901669T}, which are more demanding than the use case of galaxy cluster lensing we are considering here.
 
 
 \begin{figure}
@@ -189,11 +189,11 @@ Figure~{\ref{fig:res_profile}} shows the corresponding binned radial profile (an
 
 
 \subsection{PSF rho-statistics}
-The $\rho$-statistics \citep{2010MNRAS.404..350R, 2016MNRAS.460.2245J} are a set of two-point correlation functions involving PSF ellipticity and size residuals, $\delta e$ and $\delta T$. They quantify spatially-correlated errors in PSF modeling and contributions from PSF leakage, that yield additive biases to the shear estimation. These statistics are particularly relevant to cosmic shear studies and specific requirements have been in this context in the litterature (e.g., \citealp{2018PASJ...70S..25M, 2022PASJ...74..421L} for HSC,  \citealp{2018MNRAS.481.1149Z, 2021MNRAS.504.4312G} for DES). 
+The $\rho$-statistics \citep{2010MNRAS.404..350R, 2016MNRAS.460.2245J} are a set of two-point correlation functions involving PSF ellipticity and size residuals, $\delta e$ and $\delta T$. They quantify spatially-correlated errors in PSF modeling and contributions from PSF leakage, that yield additive biases to the shear estimation. These statistics are particularly relevant to cosmic shear studies and specific requirements have been established in this context in the litterature (e.g., \citealp{2018PASJ...70S..25M, 2022PASJ...74..421L} for HSC,  \citealp{2018MNRAS.481.1149Z, 2021MNRAS.504.4312G} for DES). 
 
 We use the LSST Science Pipelines \code{analysis\_tools}\footnote{\url{https://pipelines.lsst.io/v/daily/modules/lsst.analysis.tools}} implementation to compute the $\rho$-statistics, which internally relies on the TreeCorr software package \citep{2015ascl.soft08007J} for the correlation function calculations. The definitions of the $\rho$-statistics as calculated by \code{analysis\_tools} are documented in the LSST science pipelines and include the $\rho_1$ to $\rho_5$ originally introduced by \citet{2010MNRAS.404..350R, 2016MNRAS.460.2245J}, as well as $\rho_{3^\prime}$ defined in the context of cluster analysis by \citet{2015MNRAS.449.2219M}.
 
-We used the set of reserved stars to calculate the rho statistics in the $i$-band, up to 40 arcmin (i.e. the region of interest for A360 WL measurement) and display the results in Figure~\ref{fig:rho_stat}. We consider the Y1 and Y3 HSC requirements for cosmic shear (see Figure~26 in \citealp{2022PASJ...74..421L}) as a first point of comparison to the $\rho_1$ to $\rho_5$-statistics computed here, noting that cluster lensing would generally be less demanding that cosmic shear because of the order of magnitude larger signal we expect. 
+We used the set of reserved stars to calculate the rho stfatistics in the $i$-band, up to 40 arcmin (i.e. the region of interest for A360 WL measurement) and display the results in Figure~\ref{fig:rho_stat}. We consider the Y1 and Y3 HSC requirements for cosmic shear (see Figure~26 in \citealp{2022PASJ...74..421L}) as a first point of comparison to the $\rho_1$ to $\rho_5$-statistics computed here, noting that cluster lensing would generally be less demanding that cosmic shear because of the order of magnitude larger signal we expect. 
 
 
 
